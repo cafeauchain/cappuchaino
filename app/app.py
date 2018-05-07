@@ -10,10 +10,11 @@ def createchain():
   chainname = request.args.get('chainname')
   networkport = request.args.get('networkport')
   rpcport = request.args.get('rpcport')
+  requestip = request.remote_addr
   chain_command = "multichain-util create {0}".format(
     chainname)
-  daemon_command = "multichaind {0} -daemon -data-dir=~/.multichain/{0} -networkport={1} -rpcport={2}".format(
-    chainname, networkport, rpcport)
+  daemon_command = "multichaind {0} -daemon -data-dir=~/.multichain/{0} -port={1} -rpcport={2} -rpcallowip={3}".format(
+    chainname, networkport, rpcport, requestip)
   try:
     chain_success = subprocess.check_output(
         [chain_command], shell=True)
