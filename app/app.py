@@ -8,10 +8,12 @@ app = Flask('chaincreator')
 @app.route('/createchain')
 def createchain():
   chainname = request.args.get('chainname')
-  chain_command = "multichain-util create {0} -default-network-port=7447 -default-rpc-port=8000".format(
+  networkport = request.args.get('networkport')
+  rpcport = request.args.get('rpcport')
+  chain_command = "multichain-util create {0}".format(
     chainname)
-  daemon_command = "multichaind chain1 -daemon -data-dir=~/.multichain/{0}".format(
-    chainname)
+  daemon_command = "multichaind {0} -daemon -data-dir=~/.multichain/{0} -networkport={1} -rpcport={2}".format(
+    chainname, networkport, rpcport)
   try:
     chain_success = subprocess.check_output(
         [chain_command], shell=True)
