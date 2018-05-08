@@ -22,7 +22,7 @@ def createchain():
         [daemon_command], shell=True)
   except subprocess.CalledProcessError as e:
     return "An error occurred while trying to fetch task status updates."
-  return "Chain created: %s\nChain started: %s" % (chain_success, daemon_success)
+  return "Chain created: %s\nChain started" % (chain_success)
 
 @app.route('/')
 def hello_world():
