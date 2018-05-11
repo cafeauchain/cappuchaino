@@ -2,8 +2,7 @@ from flask import Flask
 from flask import request
 import subprocess
 
-
-app = Flask('chaincreator')
+app = Flask('__name__')
 
 @app.route('/createchain')
 def createchain():
